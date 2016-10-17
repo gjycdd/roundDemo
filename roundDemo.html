@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box {width:200px; height:200px; background:#eee; border-radius: 50%; position:relative;}
+        #smboll {width:20px; height:20px; background:#000; border-radius: 50%; position:absolute; left:90px;}
+
+    </style>
+</head>
+<body>
+    <p><span>角度：</span><input type="number" placeholder="输入数字" max="360" min="0" id="num"/></p>
+    <p><input type="range" id=range value="90" max="360"/></p>
+    <div id=box >
+        <div id="smboll"></div>
+    </div>
+
+<script>
+    num.value=range.value;
+    range.onmousedown=function(){
+        document.onmousemove=function(){
+            var sq=range.value*Math.PI/180;
+            if(sq>=0){
+                smboll.style.left=90-90*Math.cos(sq)+'px';
+                smboll.style.top=90-90*Math.sin(sq)+'px';
+            }else{
+                smboll.style.left=90+90*Math.cos(sq)+'px';
+                smboll.style.top=90+90*Math.sin(sq)+'px';
+            }
+            num.value=range.value;
+        }
+    }
+    document.onmouseup=function(){
+        document.onmousemove=null;
+    }
+    var sq=0;
+    document.onkeydown=function(e){
+        var ev =e||window.event;
+        if(ev.keyCode==13){
+            if(num.value==''){
+                num.value=0;
+            }else{
+                sq=num.value*Math.PI/180;
+            }
+            if(sq>=0){
+                smboll.style.left=90-90*Math.cos(sq)+'px';
+                smboll.style.top=90-90*Math.sin(sq)+'px';
+            }else{
+                smboll.style.left=90+90*Math.cos(sq)+'px';
+                smboll.style.top=90+90*Math.sin(sq)+'px';
+            }
+            range.value=num.value;
+        }
+    }
+</script>
+</body>
+</html>
